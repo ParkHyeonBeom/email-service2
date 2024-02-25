@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-deployment
+spec:
+  selector:
+    matchLabels:
+      type: app
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        type: app
+    spec:
+      containers:
+        - name: container
+          image: beomiya/jenkins-backend-email:1.VERSION
+          ports:
+            - containerPort: 8080
+      terminationGracePeriodSeconds: 5
+
